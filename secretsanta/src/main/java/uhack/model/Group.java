@@ -5,6 +5,8 @@
  */
 package uhack.model;
 
+import java.util.List;
+
 /**
  *
  * @author Ted
@@ -21,11 +23,15 @@ public class Group {
 
     }
 
-    public user getUser(List<User> users) {
-        return users;
+    public List<User> getUsers() {
+        return this.users;
     }
 
     public String getGroupName(String groupName) {
         return groupName;
+    }
+
+    public void setUsers(List<User> pairUp) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

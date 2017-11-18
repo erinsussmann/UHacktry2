@@ -18,7 +18,7 @@
     <maven.compiler.target>1.8</maven.compiler.target>
     <maven.compiler.showDeprecation>true</maven.compiler.showDeprecation>
     <archiveClasses>true</archiveClasses>
-    <appengine.sdk.version>true</appengine.sdk.version>
+    <appengine.sdk.version>1.9.59</appengine.sdk.version>
   </properties>
 
   <prerequisites>
@@ -170,7 +170,7 @@
             <configuration>
               <rules>
                 <requireMavenVersion>
-                  <version>3.5</version>
+                  <version>3.0</version>
                 </requireMavenVersion>
                 <requirePluginVersions>
                    <message>Best Practice is to always define plugin versions!</message>
