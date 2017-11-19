@@ -32,6 +32,6 @@ public class Group {
     }
 
     public void setUsers(List<User> pairUp) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.users = pairUp;
     }
 }
