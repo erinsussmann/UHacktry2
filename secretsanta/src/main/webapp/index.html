@@ -54,14 +54,6 @@
         <h3>If there's no mulled wine you are doing it wrong.</h3>
         <br>
 <!-- adding a person button -->
-        <form name="sentMessage" id="contactForm" novalidate>
-          <div class="control-group" style="display: inline">
-            <div class="form-group floating-label-form-group controls">
-              <input class="form-control" id="name" type="text" placeholder="Name" required data-validation-required-message="Please enter your name.">
-              <input class="form-control" id="email" type="email" placeholder="Email Address" required data-validation-required-message="Please enter your email address.">
-              <p class="help-block text-danger"></p>
-            </div>
-          </div>
 
           <div class="container">
 	<div class="row">
@@ -72,15 +64,15 @@
 
                   <form name="sentMessage" id="contactForm" novalidate>
                     <div class="control-group" style="display: inline">
-                      <div class="form-group floating-label-form-group controls">
+                      <div id="field1" class="form-group floating-label-form-group controls">
                         <input class="form-control" id="name" type="text" placeholder="Name" required data-validation-required-message="Please enter your name.">
                         <input class="form-control" id="email" type="email" placeholder="Email Address" required data-validation-required-message="Please enter your email address.">
-                        <input   id="field1"   />
-                        <button id="b1" class="btn add-more" type="button">+</button>
+
+                        
                         <p class="help-block text-danger"></p>
 
-
                     </div>
+                    <button id="b1" class="btn add-more" type="button">+</button>
                     </div>
                 </form>
             </div>
