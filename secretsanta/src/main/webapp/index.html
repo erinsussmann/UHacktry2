@@ -29,11 +29,11 @@
     </a>
     <nav id="sidebar-wrapper">
       <ul class="sidebar-nav">
-        <a id="menu-close" href="#" class="btn pull-right toggle"> <!--btn-light btn-lg pull-right toggle-->
+        <a id="menu-close" href="#" class="btn pull-right btn-light toggle"> <!--btn-light btn-lg pull-right toggle-->
           <i class="fa fa-empire fa-2x"></i>
         </a>
         <li class="sidebar-brand">
-          <a class="js-scroll-trigger" href="#top">Wine Moms Christmas</a>
+          <a class="js-scroll-trigger" href="#top">Home</a>
         </li>
         <li>
           <a class="js-scroll-trigger" href="#top">Secret Santa</a>
@@ -53,7 +53,42 @@
         <h1>Wine Mom's Christmas</h1>
         <h3>If there's no mulled wine you are doing it wrong.</h3>
         <br>
-      
+<!-- adding a person button -->
+        <form name="sentMessage" id="contactForm" novalidate>
+          <div class="control-group" style="display: inline">
+            <div class="form-group floating-label-form-group controls">
+              <input class="form-control" id="name" type="text" placeholder="Name" required data-validation-required-message="Please enter your name.">
+              <input class="form-control" id="email" type="email" placeholder="Email Address" required data-validation-required-message="Please enter your email address.">
+              <p class="help-block text-danger"></p>
+            </div>
+          </div>
+
+          <div class="container">
+	<div class="row">
+		<input type="hidden" name="count" value="1" />
+        <div class="control-group" id="fields">
+
+            <div class="controls" id="profs">
+
+                  <form name="sentMessage" id="contactForm" novalidate>
+                    <div class="control-group" style="display: inline">
+                      <div class="form-group floating-label-form-group controls">
+                        <input class="form-control" id="name" type="text" placeholder="Name" required data-validation-required-message="Please enter your name.">
+                        <input class="form-control" id="email" type="email" placeholder="Email Address" required data-validation-required-message="Please enter your email address.">
+                        <input   id="field1"   />
+                        <button id="b1" class="btn add-more" type="button">+</button>
+                        <p class="help-block text-danger"></p>
+
+
+                    </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+	</div>
+</div>
+        </form>
+
     </header>
 
     <!-- About -->
@@ -63,11 +98,11 @@
         <p class="lead">This theme features some wonderful photography courtesy of
           <a target="_blank" href="http://join.deathtothestockphoto.com/">Death to the Stock Photo</a>.</p>
       </div>
-      <!-- /.container -->
+      <!-- /.container-->
     </section>
 
-    <!-- Services -->
-    <section id="services" class="services bg-primary text-white">
+    <!-- Services
+    <section id="services" class="services text-white"> <!--bg-primary text-white
       <div class="container">
         <div class="row text-center">
           <div class="col-lg-10 mx-auto">
@@ -127,23 +162,23 @@
                 </div>
               </div>
             </div>
-            <!-- /.row (nested) -->
+            <!-- /.row (nested)
           </div>
-          <!-- /.col-lg-10 -->
+          <!-- /.col-lg-10
         </div>
-        <!-- /.row -->
+        <!-- /.row
       </div>
-      <!-- /.container -->
+      <!-- /.container
     </section>
 
-    <!-- Callout -->
+    <!-- Callout
     <aside class="callout">
       <div class="text-vertical-center">
         <h1>Vertically Centered Text</h1>
       </div>
     </aside>
 
-    <!-- Portfolio -->
+    <!-- Portfolio
     <section id="portfolio" class="portfolio">
       <div class="container">
         <div class="row">
@@ -180,33 +215,25 @@
                 </div>
               </div>
             </div>
-            <!-- /.row (nested) -->
+            <!-- /.row (nested)
             <a href="#" class="btn btn-dark">View More Items</a>
           </div>
-          <!-- /.col-lg-10 -->
+          <!-- /.col-lg-10
         </div>
-        <!-- /.row -->
+        <!-- /.row
       </div>
-      <!-- /.container -->
+      <!-- /.container
     </section>
 
-    <!-- Call to Action -->
+    <!-- Call to Action
     <aside class="call-to-action bg-primary text-white">
       <div class="container text-center">
         <h3>The buttons below are impossible to resist.</h3>
         <a href="#" class="btn btn-lg btn-light">Click Me!</a>
         <a href="#" class="btn btn-lg btn-dark">Look at Me!</a>
       </div>
-    </aside>
+    </aside> -->
 
-    <!-- Map -->
-    <section id="contact" class="map">
-      <iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;aq=0&amp;oq=twitter&amp;sll=28.659344,-81.187888&amp;sspn=0.128789,0.264187&amp;ie=UTF8&amp;hq=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;t=m&amp;z=15&amp;iwloc=A&amp;output=embed"></iframe>
-      <br/>
-      <small>
-        <a href="https://maps.google.com/maps?f=q&amp;source=embed&amp;hl=en&amp;geocode=&amp;q=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;aq=0&amp;oq=twitter&amp;sll=28.659344,-81.187888&amp;sspn=0.128789,0.264187&amp;ie=UTF8&amp;hq=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;t=m&amp;z=15&amp;iwloc=A"></a>
-      </small>
-    </section>
 
     <!-- Footer -->
     <footer>
