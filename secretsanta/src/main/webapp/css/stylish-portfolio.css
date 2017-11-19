@@ -51,8 +51,11 @@ body {
 
 .form-control {
   display: inline;
-  width: 40%;
-  margin-left: 10px;
+  width: 30vw;
+  margin-left: 0;
+}
+.buttonstyle {
+  display: inline;
 }
 
 /* Custom Button Styles */
