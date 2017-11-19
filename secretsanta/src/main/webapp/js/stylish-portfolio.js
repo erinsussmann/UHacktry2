@@ -35,7 +35,10 @@
           var addto = "#field" + next;
           var addRemove = "#field" + (next);
           next = next + 1;
-          var newIn = '<input autocomplete="off" class="input form-control" id="field' + next + '" name="field' + next + '" type="text">';
+          //var newIn = '<input autocomplete="off" class="input form-control" id="field' + next + '" name="field' + next + '" type="text">';
+          var newIn = `<div id="field${next}" name="field${next}" class="form-group floating-label-form-group controls">
+            <input class="form-control" id="name" type="text" placeholder="Name" required data-validation-required-message="Please enter your name.">
+            <input class="form-control" id="email" type="email" placeholder="Email Address" required data-validation-required-message="Please enter your email address."></div>`
           var newInput = $(newIn);
           var removeBtn = '<button id="remove' + (next - 1) + '" class="btn btn-danger remove-me" >-</button></div><div id="field">';
           var removeButton = $(removeBtn);
