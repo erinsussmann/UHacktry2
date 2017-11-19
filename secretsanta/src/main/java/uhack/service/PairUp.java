@@ -19,26 +19,33 @@ public class PairUp {
             return paired;
         } else if (hat.size() == 1 && users.size() == 1
                 && userEqual(hat.get(0), users.get(0)))  {
-
-            User u = paired.get(0);
+        	
+        	User u  = getAndRemove(users, 0);
+        	hat.remove(0);
+            
+            u.setSecretSanta(u);
+            
+            swapSecretSantas(paired.get(0), u);
             return pairUp(hat, users, paired);
         } else {
             User u1;
             User hatUser;
             if(userEqual(hat.get(0), users.get(0))) {
-                u1 = users.get(0);
-                hatUser = hat.get(1);
+                u1 = getAndRemove(hat, 0);
+            	
+                hatUser  = getAndRemove(hat, 1);
+                
                 u1.setSecretSanta(hatUser);
-                hat.remove(1);
-                users.remove(0);
+
                 paired.add(u1);
             }
             else {
-                u1 = users.get(0);
-                hatUser = hat.get(0);
+            	u1 = getAndRemove(users, 0);
+            	
+            	hatUser = getAndRemove(hat, 0);
+                
                 u1.setSecretSanta(hatUser);
-                hat.remove(0);
-                users.remove(0);
+                
                 paired.add(u1);
                 
             } 
@@ -47,17 +54,19 @@ public class PairUp {
 
     }
     
-    private static <E> E  pop (List<E> list) {
-        E e = null;
-        if(list.size() > 0) {
-            e = list.get(0);
-            list.remove(0);
-        }
-        return e;
-    }
-    
     private static boolean userEqual(User u1, User u2) {
         return u1.getEmail().equals(u2.getEmail());
     }
     
+    private static User getAndRemove(List<User> list, int index) {
+        User user = list.get(index);
+        list.remove(index);
+        return user;
+    }
+
+    private static void swapSecretSantas(User u1, User u2) {
+    	User tmp = u2.getSecretSanta();
+    	u2.setSecretSanta(u1.getSecretSanta());
+    	u1.setSecretSanta(tmp);
+    }
 }

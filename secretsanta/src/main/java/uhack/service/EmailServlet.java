@@ -8,6 +8,7 @@ package uhack.service;
 import com.google.gson.Gson;
 import java.io.BufferedReader;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import uhack.model.Group;
 import uhack.model.User;
@@ -43,23 +44,16 @@ public class EmailServlet extends HttpServlet {
         String body = getBody(req);
         System.err.println(body);
         Gson g = new Gson();
-        //Group group= g.fromJson(body, Group.class);
-        
-            List<User> userstest = new ArrayList<User>();
-            User user1 = new User("esussmann@hartford.edu", "Erin");
-            User user2 = new User("jolivetdesonte@yahoo.com", "Jo");
-            user1.setSecretSanta(user2);
-        userstest.add(user1);
-    Group test = new Group(userstest, "test");
-    System.err.print(g.toJson(test));
-    
-    
- 
-        //List<User> users = group.getUsers();
-        //List<User> hat = new ArrayList<User>(users);
-        //Collections.shuffle(hat);
-        //group.setUsers(pairUp(hat, users, new ArrayList<User>()));
-        emailGroup(test);
+        Group group= g.fromJson(body, Group.class);
+
+        System.err.print(g.toJson(group));
+
+        List<User> users = group.getUsers();
+        List<User> hat = new ArrayList<User>(users);
+        Collections.shuffle(hat);
+        group.setUsers(pairUp(hat, users, new ArrayList<User>()));
+
+        emailGroup(group);
     }
 
     private static String getBody(HttpServletRequest req) throws IOException {
@@ -81,14 +75,6 @@ public class EmailServlet extends HttpServlet {
            sendEmail(user.get(0), user.get(0).getSecretSanta());
        }
     
-    }
-
-    private static JSONObect getJSON(String body) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    private static Group getGroup(JSONObect json) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     private static void sendEmail(User giver, User reciever){
