@@ -33,5 +33,9 @@ public class User {
     public void setSecretSanta(User secretSanta) {
         this.secretSanta = secretSanta;
     }
+    
+    public User getSecretSanta(){
+        return secretSanta;
+    }
 
 }

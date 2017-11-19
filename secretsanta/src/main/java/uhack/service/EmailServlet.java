@@ -5,24 +5,31 @@
  */
 package uhack.service;
 
+import com.google.gson.Gson;
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import uhack.model.Group;
 import uhack.model.User;
+import java.util.Properties;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import java.io.UnsupportedEncodingException;
 
 
 import java.io.IOException;
+import java.util.logging.Logger;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import static uhack.service.PairUp.pairUp;
 /**
  *
  * @author Ted
@@ -30,15 +37,29 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "pairup", value = "/pairup")
 public class EmailServlet extends HttpServlet {
 
+    private static final Logger log = Logger.getLogger(EmailServlet.class.getName());
+
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String body = getBody(req);
-        JSONObect json = getJSON(body);
-        Group group = getGroup(json);
-        List<User> users = group.getUsers();
-        List<User> hat = new ArrayList<User>(users);
-        Collections.shuffle(hat);
-        group.setUsers(pairUp(hat, users, new ArrayList<User>()));
-        emailGroup(group);
+        System.err.println(body);
+        Gson g = new Gson();
+        //Group group= g.fromJson(body, Group.class);
+        
+            List<User> userstest = new ArrayList<User>();
+            User user1 = new User("esussmann@hartford.edu", "Erin");
+            User user2 = new User("jolivetdesonte@yahoo.com", "Jo");
+            user1.setSecretSanta(user2);
+        userstest.add(user1);
+    Group test = new Group(userstest, "test");
+    System.err.print(g.toJson(test));
+    
+    
+ 
+        //List<User> users = group.getUsers();
+        //List<User> hat = new ArrayList<User>(users);
+        //Collections.shuffle(hat);
+        //group.setUsers(pairUp(hat, users, new ArrayList<User>()));
+        emailGroup(test);
     }
 
     private static String getBody(HttpServletRequest req) throws IOException {
@@ -53,54 +74,13 @@ public class EmailServlet extends HttpServlet {
         return data;
     }
 
-    public static List<User> pairUp(List<User> hat, List<User> users, List<User> paired) {
-        if (hat.size() == 0 && users.size() == 0) {
-            return paired;
-        } else if (hat.size() == 1 && users.size() == 1
-                && userEqual(hat.get(0), users.get(0)))  {
-
-            User u = paired.get(0);
-            return pairUp(hat, users, paired);
-        } else {
-            User u1;
-            User hatUser;
-            if(userEqual(hat.get(0), users.get(0))) {
-                u1 = users.get(0);
-                hatUser = hat.get(1);
-                u1.setSecretSanta(hatUser);
-                hat.remove(1);
-                users.remove(0);
-                paired.add(u1);
-            }
-            else {
-                u1 = users.get(0);
-                hatUser = hat.get(0);
-                u1.setSecretSanta(hatUser);
-                hat.remove(0);
-                users.remove(0);
-                paired.add(u1);
-                
-            } 
-            return pairUp(hat, users, paired);
-        }
-
-    }
-    
-    private static <E> E  pop (List<E> list) {
-        E e = null;
-        if(list.size() > 0) {
-            e = list.get(0);
-            list.remove(0);
-        }
-        return e;
-    }
-    
-    private static boolean userEqual(User u1, User u2) {
-        return u1.getEmail().equals(u2.getEmail());
-    }
 
     private static void emailGroup(Group group) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<User> user = group.getUsers();
+       for(int i = 0; i< user.size(); i++){
+           sendEmail(user.get(0), user.get(0).getSecretSanta());
+       }
+    
     }
 
     private static JSONObect getJSON(String body) {
@@ -109,5 +89,32 @@ public class EmailServlet extends HttpServlet {
 
     private static Group getGroup(JSONObect json) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    private static void sendEmail(User giver, User reciever){
+       String giverEmail = giver.getEmail();
+       String giverName = giver.getName();
+       String recieverName = reciever.getName();
+       String message = "Hello" + giverName + ", \n Your Secret Santa is " + recieverName + ".\n Thank you, \n Santa's Elves.";
+    
+       Properties props = new Properties();
+    Session session = Session.getDefaultInstance(props, null);
+
+    try {
+      Message msg = new MimeMessage(session);
+      msg.setFrom(new InternetAddress("admin@secretsanta-186421.appspotmail.com", "Secret Santa"));
+       msg.addRecipient(Message.RecipientType.TO,
+                       new InternetAddress(giverEmail, giverName));
+      msg.setSubject("Your Secret Santa");
+      msg.setText(message);
+      Transport.send(msg);
+    } catch (AddressException e){
+      log.severe(e.getMessage());
+    } catch (MessagingException e){
+      log.severe(e.getMessage());
+    } catch (UnsupportedEncodingException e){
+     log.severe(e.getMessage());
+    }
+       
     }
 }
