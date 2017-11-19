@@ -1,5 +1,14 @@
+
 (function($) {
   "use strict"; // Start of use strict
+function Group(group, users){
+    this.groupName = group;
+    this.users = users;
+}
+function User(user, email){
+    this.userName = user;
+    this.userEmail = email;
+}
 
   // Closes the sidebar menu
   $("#menu-close").click(function(e) {
@@ -56,6 +65,11 @@
               });
       });
 
+    //iterates through our people thing
+        function submit(){
+            document.getElementByID(contactForm);
+            
+        }
 
   // Closes responsive menu when a scroll trigger link is clicked
   $('.js-scroll-trigger').click(function() {
