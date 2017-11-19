@@ -1,6 +1,3 @@
-
-(function($) {
-  "use strict"; // Start of use strict
 function Group(group, users){
     this.groupName = group;
     this.users = users;
@@ -9,6 +6,9 @@ function User(user, email){
     this.userName = user;
     this.userEmail = email;
 }
+(function($) {
+  "use strict"; // Start of use strict
+
 
   // Closes the sidebar menu
   $("#menu-close").click(function(e) {
@@ -46,8 +46,8 @@ function User(user, email){
           next = next + 1;
           //var newIn = '<input autocomplete="off" class="input form-control" id="field' + next + '" name="field' + next + '" type="text">';
           var newIn = `<div id="field${next}" name="field${next}" class="form-group floating-label-form-group controls buttonstyle">
-            <input class="form-control" id="name" type="text" placeholder="Name" required data-validation-required-message="Please enter your name.">
-            <input class="form-control" id="email" type="email" placeholder="Email Address" required data-validation-required-message="Please enter your email address."></div>`
+            <input class="form-control" name="name" id="name" type="text" placeholder="Name" required data-validation-required-message="Please enter your name.">
+            <input class="form-control" name="email" id="email" type="email" placeholder="Email Address" required data-validation-required-message="Please enter your email address."></div>`
           var newInput = $(newIn);
           var removeBtn = '<button id="remove' + (next - 1) + '" class="btn btn-danger remove-me" >-</button></div><div id="field">';
           var removeButton = $(removeBtn);
@@ -67,8 +67,15 @@ function User(user, email){
 
     //iterates through our people thing
         function submit(){
-            document.getElementByID(contactForm);
-            
+        
+         $.ajax({
+            url: "https://secretsanta-186421.appspot.com/pairup",
+            type: "POST",
+            data: JSON.stringify(data),
+            contentType: "application/json"
+            }).done(function(result) {
+                console.log(result);
+            });
         }
 
   // Closes responsive menu when a scroll trigger link is clicked
