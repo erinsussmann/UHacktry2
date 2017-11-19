@@ -32,7 +32,7 @@ public class PairUp {
             User u1;
             User hatUser;
             if(userEqual(hat.get(0), users.get(0))) {
-                u1 = getAndRemove(hat, 0);
+                u1 = getAndRemove(users, 0);
             	
                 hatUser  = getAndRemove(hat, 1);
                 

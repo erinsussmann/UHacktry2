@@ -44,6 +44,11 @@
       <artifactId>jstl</artifactId>
       <version>1.2</version>
     </dependency>
+        <dependency>
+    <groupId>com.sendgrid</groupId>
+    <artifactId>sendgrid-java</artifactId>
+    <version>4.1.2</version>
+    </dependency>
 
 <!-- [START Objectify_Dependencies] -->
     <dependency>

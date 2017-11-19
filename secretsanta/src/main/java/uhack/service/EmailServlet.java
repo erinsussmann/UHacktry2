@@ -5,6 +5,8 @@
  */
 package uhack.service;
 
+import com.sendgrid.*;
+
 import com.google.gson.Gson;
 import java.io.BufferedReader;
 import java.util.ArrayList;
@@ -24,6 +26,7 @@ import java.io.UnsupportedEncodingException;
 
 
 import java.io.IOException;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.servlet.annotation.WebServlet;
@@ -39,10 +42,10 @@ import static uhack.service.PairUp.pairUp;
 public class EmailServlet extends HttpServlet {
 
     private static final Logger log = Logger.getLogger(EmailServlet.class.getName());
+    private static final String EMAIL_KEY = "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";
 
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String body = getBody(req);
-        System.err.println(body);
         Gson g = new Gson();
         Group group= g.fromJson(body, Group.class);
 
@@ -78,29 +81,33 @@ public class EmailServlet extends HttpServlet {
     }
     
     private static void sendEmail(User giver, User reciever){
-       String giverEmail = giver.getEmail();
+        
+        
+         Email from = new Email("admin@secretsanta-186421.appspotmail.com");
+    String subject = "Your Secret Santa";
+    Email to = new Email(giver.getEmail());
+    String giverEmail = giver.getEmail();
        String giverName = giver.getName();
        String recieverName = reciever.getName();
-       String message = "Hello" + giverName + ", \n Your Secret Santa is " + recieverName + ".\n Thank you, \n Santa's Elves.";
-    
-       Properties props = new Properties();
-    Session session = Session.getDefaultInstance(props, null);
+    Content content = new Content("text/plain", "Hello" + giverName + ", \n Your Secret Santa is " + recieverName + ".\n Thank you, \n Santa's Elves.");
+    Mail mail = new Mail(from, subject, to, content);
 
+    SendGrid sg = new SendGrid(EMAIL_KEY);
+    Request request = new Request();
+    
+    //-------------------------------------
     try {
-      Message msg = new MimeMessage(session);
-      msg.setFrom(new InternetAddress("admin@secretsanta-186421.appspotmail.com", "Secret Santa"));
-       msg.addRecipient(Message.RecipientType.TO,
-                       new InternetAddress(giverEmail, giverName));
-      msg.setSubject("Your Secret Santa");
-      msg.setText(message);
-      Transport.send(msg);
-    } catch (AddressException e){
-      log.severe(e.getMessage());
-    } catch (MessagingException e){
-      log.severe(e.getMessage());
-    } catch (UnsupportedEncodingException e){
-     log.severe(e.getMessage());
-    }
+        
+        request.setMethod(Method.POST);
+      request.setEndpoint("mail/send");
+      request.setBody(mail.build());
+      Response response = sg.api(request);
+      
+      //----------
+    
+    }   catch (IOException ex) {
+              log.severe(ex.getMessage());
+        }
        
     }
 }

@@ -3,8 +3,8 @@ function Group(group, users){
     this.users = users;
 }
 function User(user, email){
-    this.userName = user;
-    this.userEmail = email;
+    this.name = user;
+    this.email = email;
 }
 (function($) {
   "use strict"; // Start of use strict
@@ -67,16 +67,24 @@ function User(user, email){
 
     //iterates through our people thing
         function submit(){
-        
+           var emails = $("[name='email']");
+            var names = $("[name='name']");
+            var users = []
+			for(var i = 0; i < emails.length; i++) {
+			users.push(new User(names[i].value,emails[i].value));
+                }
+        var data = JSON.stringify(new Group("Test Group", users));
          $.ajax({
             url: "https://secretsanta-186421.appspot.com/pairup",
             type: "POST",
-            data: JSON.stringify(data),
+            data: data,
             contentType: "application/json"
             }).done(function(result) {
                 console.log(result);
             });
         }
+
+        $("#sendBtn").click(submit);
 
   // Closes responsive menu when a scroll trigger link is clicked
   $('.js-scroll-trigger').click(function() {
