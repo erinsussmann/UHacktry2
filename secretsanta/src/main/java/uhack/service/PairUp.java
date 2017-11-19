@@ -15,7 +15,7 @@ import uhack.model.User;
 public class PairUp {
     
     public static List<User> pairUp(List<User> hat, List<User> users, List<User> paired) {
-        if (hat.size() == 0 && users.size() == 0) {
+        if (hat.isEmpty() && users.isEmpty()) {
             return paired;
         } else if (hat.size() == 1 && users.size() == 1
                 && userEqual(hat.get(0), users.get(0)))  {
@@ -26,7 +26,8 @@ public class PairUp {
             u.setSecretSanta(u);
             
             swapSecretSantas(paired.get(0), u);
-            return pairUp(hat, users, paired);
+            paired.add(u);
+            return paired;
         } else {
             User u1;
             User hatUser;

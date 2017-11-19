@@ -72,7 +72,7 @@ public class EmailServlet extends HttpServlet {
     private static void emailGroup(Group group) {
         List<User> user = group.getUsers();
        for(int i = 0; i< user.size(); i++){
-           sendEmail(user.get(0), user.get(0).getSecretSanta());
+           sendEmail(user.get(i), user.get(i).getSecretSanta());
        }
     
     }
